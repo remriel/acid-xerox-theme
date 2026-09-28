@@ -9,4 +9,4 @@
 
 ## RESUME HERE
 
-1.0.1 CSS, changelog, manifest, README, and docs are updated. CSS is installed in the vault, hashes match. File row geometry remains native. Do not claim all bugs eliminated: the simulated scroll result is inconclusive. Local commit and private GitHub synchronization remain.
+1.0.1 CSS, changelog, manifest, README, and docs are committed as `829a3eeb34134445c379e90b6bf7c3a762671b32` and pushed to private `https://github.com/remriel/acid-xerox-theme`. Installed CSS and manifest hashes match the tracked release files. Do not claim all bugs eliminated: the simulated scroll result is inconclusive. Normal foreground sidebar scrolling still needs confirmation.
