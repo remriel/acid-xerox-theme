@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.0
+  Acid Xerox v1.0.1
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -55,10 +55,14 @@ body {
   --h4-weight: 800;
   --h5-weight: 800;
   --h6-weight: 800;
-  --h1-line-height: 0.98;
-  --h2-line-height: 1;
-  --h3-line-height: 1.05;
+  --h1-line-height: 1.2;
+  --h2-line-height: 1.25;
+  --h3-line-height: 1.3;
 
+  --h1-size: 2em;
+  --h2-size: 1.6em;
+  --h3-size: 1.3em;
+  --file-margins: 28px;
   --file-line-width: 860px;
   --line-height-normal: 1.62;
   --line-height-tight: 1.18;
@@ -147,7 +151,7 @@ body {
   --background-secondary-alt: #262626;
   --background-modifier-hover: #333333;
   --background-modifier-active-hover: #414141;
-  --background-modifier-border: #f7f4ea;
+  --background-modifier-border: #65645f;
   --background-modifier-border-hover: var(--ax-yellow);
   --background-modifier-border-focus: var(--ax-cyan);
   --background-modifier-form-field: #1b1b1b;
@@ -181,7 +185,7 @@ body {
   --tab-text-color-focused: #f7f4ea;
   --tab-text-color-focused-active: #050505;
   --tab-background-active: var(--ax-yellow);
-  --tab-divider-color: #f7f4ea;
+  --tab-divider-color: #65645f;
 
   --icon-color: #f7f4ea;
   --icon-color-hover: var(--ax-yellow);
@@ -195,14 +199,22 @@ body {
   --tag-color: #050505;
   --tag-background: var(--ax-green);
   --tag-background-hover: var(--ax-yellow);
-  --tag-border-color: #f7f4ea;
+  --tag-border-color: #050505;
   --tag-border-color-hover: var(--ax-yellow);
 
-  --code-normal: #f7f4ea;
-  --code-background: #252525;
+  --code-normal: #e5dfc9;
+  --code-background: #202225;
+  --code-comment: #a5a49b;
+  --code-function: #c9a4ff;
+  --code-keyword: #ff82b6;
+  --code-string: #b5dd83;
+  --code-value: #f7c479;
+  --text-selection: rgba(0, 231, 255, 0.22);
+  --text-highlight-bg: rgba(255, 242, 0, 0.18);
+  --checkbox-marker-color: #050505;
   --blockquote-border-color: var(--ax-pink);
   --blockquote-color: #f7f4ea;
-  --hr-color: #f7f4ea;
+  --hr-color: #65645f;
 
   --graph-line: #77736d;
   --graph-node: var(--ax-pink);
@@ -312,26 +324,21 @@ body {
 
 .nav-folder-title,
 .nav-file-title {
-  border: 2px solid transparent;
-  font-size: 12px;
+  /* File explorer virtualizes rows. Preserve native height and spacing. */
   font-weight: 760;
-  line-height: 1.25;
-  margin: 2px 4px;
 }
 
 .nav-folder-title:hover,
 .nav-file-title:hover {
   background: var(--ax-yellow);
-  border-color: var(--ax-black);
   color: var(--ax-black);
-  transform: translateX(2px);
+  box-shadow: inset 0 0 0 2px var(--ax-black);
 }
 
 .nav-file-title.is-active {
   background: var(--ax-pink);
-  border: 2px solid var(--ax-black);
   color: var(--ax-black);
-  box-shadow: var(--ax-shadow-small);
+  box-shadow: inset 0 0 0 2px var(--ax-black);
   font-weight: 900;
 }
 
@@ -361,16 +368,8 @@ body {
   background-size: 24px 24px;
 }
 
-.markdown-source-view .cm-scroller,
-.markdown-reading-view .markdown-preview-view {
-  scrollbar-gutter: stable;
-}
-
-.markdown-source-view.mod-cm6 .cm-contentContainer,
-.markdown-reading-view .markdown-preview-sizer {
-  padding-left: 28px;
-  padding-right: 28px;
-}
+/* Let Obsidian own scrolling, gutters and virtualized content geometry.
+   Editor padding belongs in --file-margins, never on cm-contentContainer. */
 
 /* ---------- Headings ---------- */
 .markdown-rendered h1,
@@ -382,31 +381,28 @@ body {
   letter-spacing: -0.045em;
 }
 
-.markdown-rendered h1,
-.markdown-source-view.mod-cm6 .HyperMD-header-1 {
+.markdown-rendered h1 {
   background: var(--ax-yellow);
   border: var(--ax-border) solid var(--ax-black);
   box-shadow: var(--ax-shadow);
   color: var(--ax-black);
-  font-size: clamp(2.1rem, 6vw, 4.4rem);
+  font-size: var(--h1-size);
   padding: 0.18em 0.28em 0.2em;
   text-transform: uppercase;
 }
 
-.markdown-rendered h2,
-.markdown-source-view.mod-cm6 .HyperMD-header-2 {
+.markdown-rendered h2 {
   background: var(--ax-pink);
   border-left: 10px solid var(--ax-black);
   color: var(--ax-black);
-  font-size: clamp(1.55rem, 4vw, 2.55rem);
+  font-size: var(--h2-size);
   padding: 0.14em 0.3em 0.18em;
   text-transform: uppercase;
 }
 
-.markdown-rendered h3,
-.markdown-source-view.mod-cm6 .HyperMD-header-3 {
+.markdown-rendered h3 {
   border-bottom: 5px solid var(--ax-cyan);
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: var(--h3-size);
   padding-bottom: 0.12em;
   text-transform: uppercase;
 }
@@ -483,7 +479,7 @@ a.tag:hover {
 }
 
 /* ---------- Lists / task items ---------- */
-.markdown-rendered li:not(.task-list-item)::marker {
+.markdown-rendered ul > li:not(.task-list-item)::marker {
   color: var(--ax-pink);
   content: "■  ";
 }
@@ -509,8 +505,7 @@ input[type="checkbox"]:checked {
 }
 
 /* ---------- Blockquotes ---------- */
-.markdown-rendered blockquote,
-.markdown-source-view.mod-cm6 .HyperMD-quote {
+.markdown-rendered blockquote {
   background: color-mix(in srgb, var(--ax-pink) 14%, var(--background-primary));
   border: var(--ax-border) solid var(--text-normal);
   border-left: 10px solid var(--ax-pink);
@@ -520,8 +515,7 @@ input[type="checkbox"]:checked {
 }
 
 /* ---------- Code ---------- */
-.markdown-rendered code,
-.cm-inline-code {
+.markdown-rendered :not(pre) > code {
   border: 2px solid var(--text-normal);
   box-shadow: 2px 2px 0 var(--ax-pink);
   font-size: 0.86em;
@@ -534,18 +528,11 @@ input[type="checkbox"]:checked {
   padding: 18px;
 }
 
-.markdown-rendered pre::before {
-  content: "CODE / RAW";
-  display: inline-block;
-  background: var(--ax-cyan);
-  border: 2px solid var(--ax-black);
-  color: var(--ax-black);
-  font-family: var(--font-monospace-theme);
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  margin-bottom: 14px;
-  padding: 3px 7px;
+.markdown-rendered pre code {
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  font-size: inherit;
 }
 
 /* ---------- Tables ---------- */
@@ -815,15 +802,13 @@ button.mod-warning:hover {
 }
 
 /* ---------- Custom utility classes ---------- */
-.markdown-preview-view.poster h1,
-.markdown-source-view.poster .HyperMD-header-1 {
+.markdown-preview-view.poster h1 {
   background: var(--ax-pink);
   box-shadow: 8px 8px 0 var(--ax-cyan), 14px 14px 0 var(--ax-yellow);
   transform: rotate(-0.5deg);
 }
 
-.markdown-preview-view.index-card .markdown-preview-sizer,
-.markdown-source-view.index-card .cm-contentContainer {
+.markdown-preview-view.index-card .markdown-preview-sizer {
   background: var(--ax-white);
   border: var(--ax-border) solid var(--ax-black);
   box-shadow: 10px 10px 0 var(--ax-pink);
@@ -835,18 +820,12 @@ button.mod-warning:hover {
 /* ---------- Mobile ---------- */
 .is-mobile {
   --file-line-width: 100%;
+  --file-margins: 16px;
 }
 
-.is-mobile .markdown-source-view.mod-cm6 .cm-contentContainer,
-.is-mobile .markdown-reading-view .markdown-preview-sizer {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.is-mobile .markdown-rendered h1,
-.is-mobile .markdown-source-view.mod-cm6 .HyperMD-header-1 {
+.is-mobile .markdown-rendered h1 {
   box-shadow: 4px 4px 0 var(--ax-black);
-  font-size: 2.15rem;
+  font-size: var(--h1-size);
 }
 
 .is-mobile .status-bar {
@@ -861,4 +840,138 @@ button.mod-warning:hover {
     scroll-behavior: auto;
     transition-duration: 0.01ms;
   }
+}
+
+/* ---------- Stable editor / accessible dark surfaces ---------- */
+/* Color-only CM6 accents preserve the native line box and scroll estimates. */
+.markdown-source-view.mod-cm6 .HyperMD-header-1 { color: var(--text-accent); }
+.markdown-source-view.mod-cm6 .HyperMD-header-2 { color: var(--text-accent); }
+.markdown-source-view.mod-cm6 .HyperMD-header-3 { color: var(--text-normal); }
+.markdown-source-view.mod-cm6 .HyperMD-quote {
+  background: color-mix(in srgb, var(--ax-pink) 8%, var(--background-primary));
+}
+.cm-inline-code { color: var(--code-normal); }
+/* Hashtags are split into several inline tokens in Live Preview. */
+.cm-hashtag {
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  font-size: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.theme-dark .markdown-source-view,
+.theme-dark .markdown-reading-view {
+  background-image:
+    linear-gradient(to right, rgba(247,244,234,0.018) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(247,244,234,0.018) 1px, transparent 1px);
+}
+.theme-dark .markdown-rendered h1 {
+  background: #242316;
+  color: var(--ax-yellow);
+  border-color: #77713b;
+  box-shadow: 4px 4px 0 #050505;
+}
+.theme-dark .markdown-rendered h2 {
+  background: #291b24;
+  color: #ff82b6;
+  border-left-color: var(--ax-pink);
+}
+.theme-dark .markdown-rendered h1 a,
+.theme-dark .markdown-rendered h2 a { color: inherit; }
+.theme-dark .markdown-rendered h1 a:hover,
+.theme-dark .markdown-rendered h2 a:hover { color: var(--ax-black); }
+.theme-dark .workspace-ribbon,
+.theme-dark .workspace-sidedock-vault-profile,
+.theme-dark .workspace-tab-header-container,
+.theme-dark .modal,
+.theme-dark .menu,
+.theme-dark .prompt,
+.theme-dark .popover,
+.theme-dark .metadata-container,
+.theme-dark .metadata-property,
+.theme-dark .setting-item,
+.theme-dark .callout,
+.theme-dark .callout-title,
+.theme-dark .markdown-rendered blockquote,
+.theme-dark .markdown-rendered pre,
+.theme-dark .markdown-rendered :not(pre) > code,
+.theme-dark .markdown-rendered table,
+.theme-dark .markdown-rendered th,
+.theme-dark .markdown-rendered td {
+  border-color: var(--background-modifier-border);
+}
+.theme-dark .markdown-rendered blockquote { border-left-color: var(--ax-pink); }
+.theme-dark .prompt,
+.theme-dark .suggestion-container,
+.theme-dark .menu,
+.theme-dark .modal { box-shadow: 6px 6px 0 #050505; }
+.theme-dark .status-bar {
+  background: #20201a;
+  color: #dedba7;
+  border-color: #65645f;
+}
+.theme-dark .markdown-preview-view.index-card .markdown-preview-sizer {
+  background: #191919;
+  color: var(--text-normal);
+  border-color: #65645f;
+}
+.markdown-source-view.index-card { background-color: var(--background-primary-alt); }
+/* Never transform CM6 ancestors or lines (including poster/index-card notes). */
+.theme-dark .workspace-tab-header.is-active {
+  --icon-color: #050505;
+  --icon-color-hover: #050505;
+  --tab-text-color: #050505;
+  --tab-text-color-focused: #050505;
+}
+.theme-dark .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: #050505;
+}
+.nav-folder-title:hover,
+.nav-file-title:hover,
+.nav-file-title.is-active,
+.suggestion-item.is-selected {
+  --text-muted: #333328;
+  --text-faint: #444438;
+  --icon-color: #050505;
+  --icon-color-hover: #050505;
+  --nav-collapse-icon-color: #050505;
+}
+.nav-folder-title:hover .nav-folder-title-content::before { color: #050505; }
+.suggestion-item.is-selected .suggestion-note,
+.suggestion-item.is-selected .suggestion-hotkey { color: #333328; }
+button:disabled,
+button:disabled:hover {
+  transform: none;
+  background: var(--interactive-normal);
+  color: var(--text-muted);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+button:focus-visible,
+.clickable-icon:focus-visible,
+.markdown-rendered a:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 3px;
+}
+.theme-dark input[type="text"],
+.theme-dark input[type="search"],
+.theme-dark input[type="email"],
+.theme-dark input[type="number"],
+.theme-dark textarea,
+.theme-dark .dropdown {
+  border-color: #65645f;
+  box-shadow: 3px 3px 0 #050505;
+}
+.theme-dark input:focus-visible,
+.theme-dark textarea:focus-visible,
+.theme-dark select:focus-visible { outline: 2px solid var(--ax-cyan); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .workspace-ribbon .clickable-icon:hover,
+  .nav-folder-title:hover,
+  .nav-file-title:hover,
+  a.tag:hover,
+  button:hover,
+  .mod-cta:hover,
+  .markdown-preview-view.poster h1 { transform: none; }
 }

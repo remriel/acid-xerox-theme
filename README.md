@@ -68,6 +68,7 @@ The chaos is controlled. Body copy stays calm. Navigation, headings, metadata, s
 - No external assets.
 - No `!important` rules.
 - No `:has()` selectors.
+- Version 1.0.1 keeps native Obsidian sidebar and Live Preview row geometry to support stable scrolling.
 
 ## License
 
