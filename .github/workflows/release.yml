@@ -1,12 +1,20 @@
 name: Release theme
 
+# Keep the public theme release in sync with manifest.json.
+# Obsidian requires an exact, unprefixed tag and both assets.
 on:
   push:
+    branches:
+      - main
     tags:
       - "*.*.*"
 
 permissions:
   contents: write
+
+concurrency:
+  group: acid-xerox-release
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -14,20 +22,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify tag matches manifest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify manifest version and test CSS
         shell: bash
         run: |
-          MANIFEST_VERSION=$(python -c 'import json; print(json.load(open("manifest.json"))["version"])')
-          if [ "$MANIFEST_VERSION" != "${GITHUB_REF_NAME}" ]; then
-            echo "manifest.json version ($MANIFEST_VERSION) does not match tag (${GITHUB_REF_NAME})"
+          set -euo pipefail
+          node --test tests/theme.test.mjs
+          VERSION=$(python3 -c 'import json; print(json.load(open("manifest.json"))["version"])')
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Manifest version must be unprefixed SemVer (example: 1.0.2), got: $VERSION"
+            exit 1
+          fi
+          if [[ "$GITHUB_REF_TYPE" == "tag" && "$GITHUB_REF_NAME" != "$VERSION" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match manifest version $VERSION"
             exit 1
           fi
 
-      - name: Create GitHub release
+      - name: Publish exact-version Obsidian release
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
+          set -euo pipefail
+          VERSION=$(python3 -c 'import json; print(json.load(open("manifest.json"))["version"])')
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "Release $VERSION already published."
+            exit 0
+          fi
+          gh release create "$VERSION" \
             manifest.json theme.css \
+            --target "$GITHUB_SHA" \
             --generate-notes \
-            --title "Acid Xerox ${GITHUB_REF_NAME}"
+            --title "Acid Xerox $VERSION"
