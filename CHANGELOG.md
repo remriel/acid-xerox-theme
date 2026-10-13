@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 - 2026-10-13
+
+- Resolve Obsidian theme CSS lint compatibility warnings for `text-decoration-color`, `text-decoration-line`, and `text-decoration-thickness`; use supported underline styling without changing line geometry.
+- Remove partially supported `box-decoration-break` and `-webkit-box-decoration-break` from highlights.
+- Add regression coverage for the flagged declarations while preserving the 1.0.2 large-folder scrolling fixes.
+
+
 ## 1.0.2 - 2026-10-13
 
 - Stabilize file explorer rendering with documented navigation variables instead of changing virtualized row geometry.

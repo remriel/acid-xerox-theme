@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.2
+  Acid Xerox v1.0.3
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -418,9 +418,8 @@ body {
 
 .markdown-rendered em,
 .cm-em {
+  /* Native underline avoids partially supported decoration extensions. */
   text-decoration: underline;
-  text-decoration-color: var(--ax-pink);
-  text-decoration-thickness: 3px;
   text-underline-offset: 3px;
 }
 
@@ -428,8 +427,6 @@ body {
 .cm-highlight {
   background: var(--ax-yellow);
   color: var(--ax-black);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
 }
 /* Keep vertical padding out of CodeMirror's virtualized inline geometry. */
 .markdown-rendered mark { padding: 0.05em 0.18em; }
@@ -440,8 +437,7 @@ body {
 .cm-hmd-internal-link,
 .cm-link {
   font-weight: 850;
-  text-decoration-line: underline;
-  text-decoration-thickness: 3px;
+  text-decoration: underline;
   text-underline-offset: 3px;
 }
 
@@ -450,7 +446,6 @@ body {
 .cm-link:hover {
   background: var(--ax-yellow);
   color: var(--ax-black);
-  text-decoration-color: var(--ax-black);
 }
 
 /* ---------- Tags ---------- */

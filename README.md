@@ -70,11 +70,11 @@ The chaos is controlled. Body copy stays calm. Navigation, headings, metadata, s
 - No external assets.
 - No `!important` rules.
 - No `:has()` selectors.
-- Version 1.0.2 preserves native file-tree row geometry and sidebar scrollbar sizing in large root and nested folders.
+- Version 1.0.3 preserves native file-tree scrolling behavior and removes partially supported text-decoration and box-decoration-break rules.
 
 ## Large-folder scrolling
 
-Acid Xerox does not install scroll handlers or change wheel speed. In 1.0.2, file titles use single-line rows, fixed font weight in all states, and native sidebar scrollbars to avoid disrupting Obsidian's virtualized file explorer. Reload Obsidian after upgrading. If the same jumping occurs with the **Default** theme and community plugins disabled, report an Obsidian file-explorer issue with your app version and reproduction steps.
+Acid Xerox does not install scroll handlers or change wheel speed. Since 1.0.2, file titles use single-line rows, fixed font weight in all states, and native sidebar scrollbars to avoid disrupting Obsidian's virtualized file explorer. Reload Obsidian after upgrading. If the same jumping occurs with the **Default** theme and community plugins disabled, report an Obsidian file-explorer issue with your app version and reproduction steps.
 
 ## License
 

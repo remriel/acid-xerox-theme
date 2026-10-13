@@ -45,3 +45,11 @@ test('highlight decorations do not enlarge CodeMirror line boxes', () => {
 test('embedded media respect the available document width', () => {
   assert.match(css, /\.markdown-rendered iframe\s*\{[^}]*max-width:\s*100%\s*;/);
 });
+
+test('Obsidian-compatible underlines avoid partially supported decoration features', () => {
+  assert.doesNotMatch(stripped, /text-decoration-(?:color|line|thickness)\s*:/);
+  assert.match(stripped, /text-decoration:\s*underline\s*;/);
+});
+test('highlight styling avoids partially supported box-decoration-break', () => {
+  assert.doesNotMatch(stripped, /(?:-webkit-)?box-decoration-break\s*:/);
+});
