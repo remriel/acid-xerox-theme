@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.1
+  Acid Xerox v1.0.2
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -65,7 +65,6 @@ body {
   --file-margins: 28px;
   --file-line-width: 860px;
   --line-height-normal: 1.62;
-  --line-height-tight: 1.18;
 }
 
 .theme-light {
@@ -315,49 +314,40 @@ body {
 }
 
 /* ---------- Sidebars and navigation ---------- */
+/* Keep Obsidian's virtualized file-tree row geometry entirely native. */
+.workspace-leaf-content[data-type="file-explorer"] {
+  --nav-item-white-space: nowrap;
+  --nav-item-weight: 700;
+  --nav-item-weight-hover: 700;
+  --nav-item-weight-active: 700;
+  --nav-item-background-hover: var(--ax-yellow);
+  --nav-item-color-hover: var(--ax-black);
+  --nav-item-background-active: var(--ax-pink);
+  --nav-item-color-active: var(--ax-black);
+  --nav-item-background-selected: var(--ax-pink);
+  --nav-item-color-selected: var(--ax-black);
+}
+.theme-dark .workspace-leaf-content[data-type="file-explorer"] {
+  --nav-item-background-active: var(--ax-cyan);
+  --nav-item-background-selected: var(--ax-cyan);
+  --nav-item-color-active: #050505;
+  --nav-item-color-selected: #050505;
+}
+.workspace-leaf-content[data-type="file-explorer"] .nav-files-container {
+  scroll-behavior: auto;
+  overscroll-behavior-y: contain;
+}
 .workspace-leaf-content[data-type="file-explorer"] .nav-header,
 .workspace-leaf-content[data-type="search"] .nav-header,
 .workspace-leaf-content[data-type="backlink"] .nav-header {
   border-bottom: 2px solid var(--text-normal);
   padding-bottom: 10px;
 }
-
-.nav-folder-title,
-.nav-file-title {
-  /* File explorer virtualizes rows. Preserve native height and spacing. */
-  font-weight: 760;
-}
-
-.nav-folder-title:hover,
-.nav-file-title:hover {
-  background: var(--ax-yellow);
-  color: var(--ax-black);
-  box-shadow: inset 0 0 0 2px var(--ax-black);
-}
-
-.nav-file-title.is-active {
-  background: var(--ax-pink);
-  color: var(--ax-black);
-  box-shadow: inset 0 0 0 2px var(--ax-black);
-  font-weight: 900;
-}
-
-.theme-dark .nav-file-title.is-active {
-  background: var(--ax-cyan);
-  color: #050505;
-}
-
-.nav-folder-title-content::before {
-  content: "//";
-  margin-right: 7px;
-  color: var(--ax-pink);
-  font-family: var(--font-monospace-theme);
-  font-weight: 900;
-}
-
-.nav-folder.is-collapsed .nav-folder-title-content::before {
-  color: var(--text-faint);
-}
+/* Paint-only accents; no inserted text, changing row dimensions or transforms. */
+.nav-folder-title { box-shadow: inset 4px 0 0 var(--ax-pink); }
+.nav-folder-title:hover { box-shadow: inset 4px 0 0 var(--ax-black), inset 0 0 0 2px var(--ax-black); }
+.nav-file-title:hover,
+.nav-file-title.is-active { box-shadow: inset 0 0 0 2px var(--ax-black); }
 
 /* ---------- Editor canvas ---------- */
 .markdown-source-view,
@@ -743,20 +733,16 @@ button.mod-warning:hover {
 }
 
 /* ---------- Scrollbars ---------- */
-::-webkit-scrollbar {
-  width: 13px;
-  height: 13px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--ax-pink);
-  border: 2px solid var(--text-normal);
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background-secondary);
-  border-left: 2px solid var(--text-normal);
-}
+/* Leave virtualized lists native; style only document and dialog scrollbars. */
+.markdown-preview-view::-webkit-scrollbar,
+.cm-scroller::-webkit-scrollbar,
+.modal::-webkit-scrollbar { width: 13px; height: 13px; }
+.markdown-preview-view::-webkit-scrollbar-thumb,
+.cm-scroller::-webkit-scrollbar-thumb,
+.modal::-webkit-scrollbar-thumb { background: var(--ax-pink); border: 2px solid var(--text-normal); }
+.markdown-preview-view::-webkit-scrollbar-track,
+.cm-scroller::-webkit-scrollbar-track,
+.modal::-webkit-scrollbar-track { background: var(--background-secondary); border-left: 2px solid var(--text-normal); }
 
 /* ---------- Canvas ---------- */
 .canvas-node-container {
@@ -937,7 +923,6 @@ button.mod-warning:hover {
   --icon-color-hover: #050505;
   --nav-collapse-icon-color: #050505;
 }
-.nav-folder-title:hover .nav-folder-title-content::before { color: #050505; }
 .suggestion-item.is-selected .suggestion-note,
 .suggestion-item.is-selected .suggestion-hotkey { color: #333328; }
 button:disabled,

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.2 - 2026-10-13
+
+- Stabilize file explorer rendering with documented navigation variables instead of changing virtualized row geometry.
+- Keep long folder/file titles single-line and their font weight constant across hover and selection.
+- Replace generated folder prefix text with a paint-only accent that cannot alter row measurements.
+- Restore native scrollbar sizing in large file trees; scope styled scrollbars to note panes and dialogs.
+- Prevent smooth file-explorer scrolling and wheel-scroll chaining into surrounding panes.
+- Restore native global tight line-height, and add dependency-free regression checks.
+
 ## 1.0.1 - 2026-09-28
 
 - Preserve Obsidian's native file-explorer row size and spacing so virtualized sidebar rows stay in place while scrolling.
