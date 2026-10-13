@@ -1,10 +1,10 @@
 # Acid Xerox
 
+![Acid Xerox preview](./images/screenshot.png)
+
 **Acid Xerox** is a bold, colorful neo-brutalist theme for Obsidian, built from the visual language of 1990s zines, photocopied flyers, record sleeves, rave graphics, early desktop publishing, and chunky interface chrome.
 
 It is loud on purpose, but it still has to function as a note-taking environment. The theme uses hard borders, offset shadows, fluorescent accents, condensed display typography, highlighted navigation, visible hierarchy, and a paper-grid writing surface while keeping body text readable.
-
-![Acid Xerox preview](./images/screenshot.png)
 
 ## Design language
 
