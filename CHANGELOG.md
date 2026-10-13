@@ -8,6 +8,8 @@
 - Restore native scrollbar sizing in large file trees; scope styled scrollbars to note panes and dialogs.
 - Prevent smooth file-explorer scrolling and wheel-scroll chaining into surrounding panes.
 - Restore native global tight line-height, and add dependency-free regression checks.
+- Avoid padding CodeMirror inline highlights, which can disturb virtual line measurements.
+- Bound embedded images, videos and iframes to the pane width without growing past their border box.
 
 ## 1.0.1 - 2026-09-28
 

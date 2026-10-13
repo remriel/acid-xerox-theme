@@ -428,10 +428,12 @@ body {
 .cm-highlight {
   background: var(--ax-yellow);
   color: var(--ax-black);
-  padding: 0.05em 0.18em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+/* Keep vertical padding out of CodeMirror's virtualized inline geometry. */
+.markdown-rendered mark { padding: 0.05em 0.18em; }
+.cm-highlight { padding: 0; }
 
 /* ---------- Links ---------- */
 .markdown-rendered a,
@@ -772,6 +774,8 @@ button.mod-warning:hover {
 .markdown-rendered img,
 .markdown-rendered video,
 .markdown-rendered iframe {
+  box-sizing: border-box;
+  max-width: 100%;
   border: var(--ax-border) solid var(--text-normal);
   box-shadow: var(--ax-shadow);
 }

@@ -38,3 +38,10 @@ test('no editor virtualized row geometry overrides', () => {
   assert.doesNotMatch(stripped, /\.cm-contentContainer\s*\{/);
   assert.doesNotMatch(stripped, /\.cm-line\s*\{[^}]*(?:padding|height|transform)\s*:/);
 });
+
+test('highlight decorations do not enlarge CodeMirror line boxes', () => {
+  assert.match(css, /\.cm-highlight\s*\{\s*padding:\s*0\s*;\s*\}/);
+});
+test('embedded media respect the available document width', () => {
+  assert.match(css, /\.markdown-rendered iframe\s*\{[^}]*max-width:\s*100%\s*;/);
+});
