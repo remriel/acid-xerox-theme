@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 - 2026-10-16
+
+- Make reduced-motion transitions truly immediate. A global 0.01ms transition delayed virtualized row padding resets, causing indentation to grow every time a folder was reopened.
+- Preserve the 1.0.4 scroll-anchoring fix.
+
 ## 1.0.4 - 2026-10-16
 
 - Disable browser scroll anchoring inside Obsidian's virtualized file explorer. Recycled rows previously caused runaway jumps and could move the list down after an upward wheel event.

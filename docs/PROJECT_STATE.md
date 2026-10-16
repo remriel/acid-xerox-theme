@@ -31,6 +31,10 @@
 - The user confirmed that physical wheel scrolling works after the fix. Commit `318cdc4` is on `main` and tagged `1.0.4`; both validation and release workflows passed, and the release includes both required assets.
 - Windows Computer Use failed to capture the app and was abandoned. A previous attempt to disable several live stylesheet rules at once coincided with Obsidian closing; isolate future experiments in a test vault and restore modified CSS rules after each test.
 
+## 1.0.5 indentation fix
+
+The reduced-motion universal rule used transition-duration: 0.01ms. This introduced a transition on native virtual-list padding resets. Obsidian measured the previous padding and accumulated indentation on each folder reopen. Changed the duration to 0s; retained overflow-anchor: none. An isolated six-cycle test held child padding at 42px throughout, and two measured cycles in the user vault also held at 42px. Later user-vault samples were unrendered and do not count as verification. All ten static tests pass. Installed 1.0.5 into the user vault.
+
 ## RESUME HERE
 
-Version 1.0.4 is released, locally installed, and confirmed working by the user. No unfinished work remains. If the problem returns after an Obsidian update, inspect the computed `overflow-anchor` on `.nav-files-container` and repeat the controlled 120-pixel and small-nudge down/up tests in a long folder. Avoid changing file-row geometry without a live reproduction.
+The 1.0.5 indentation fix is implemented, tested, and installed. Preserve both immediate reduced-motion transitions and disabled file-tree scroll anchoring. Publishing 1.0.5 through the existing main-branch release workflow.

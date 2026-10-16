@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.4
+  Acid Xerox v1.0.5
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -825,7 +825,8 @@ button.mod-warning:hover {
   *::before,
   *::after {
     scroll-behavior: auto;
-    transition-duration: 0.01ms;
+    /* Virtualized rows must be measured after an immediate padding reset. */
+    transition-duration: 0s;
   }
 }
 

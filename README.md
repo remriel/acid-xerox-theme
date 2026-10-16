@@ -70,6 +70,7 @@ The chaos is controlled. Body copy stays calm. Navigation, headings, metadata, s
 - No external assets.
 - No `!important` rules.
 - No `:has()` selectors.
+- Version 1.0.5 fixes accumulating folder indentation under reduced motion and retains the 1.0.4 scroll fix.
 - Version 1.0.4 disables browser scroll anchoring in the virtualized file tree to prevent runaway or wrong-way scrolling.
 
 ## Large-folder scrolling

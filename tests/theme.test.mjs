@@ -7,6 +7,11 @@ const manifest = JSON.parse(readFileSync(new URL('../manifest.json', import.meta
 const stripped = css.replace(/\/\*[\s\S]*?\*\//g, '');
 const explorer = css.split('/* ---------- Sidebars and navigation ---------- */')[1]?.split('/* ---------- Editor canvas ---------- */')[0];
 
+test('reduced motion does not delay virtual row padding resets', () => {
+  assert.doesNotMatch(stripped, /transition-duration:\s*0\.01ms/);
+  assert.match(stripped, /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{\s*\*,[\s\S]*?transition-duration:\s*0s\s*;/);
+});
+
 test('theme version matches manifest', () => {
   assert.equal(css.match(/Acid Xerox v(\d+\.\d+\.\d+)/)?.[1], manifest.version);
 });
