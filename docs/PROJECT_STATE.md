@@ -1,7 +1,7 @@
 # Project state
 
 - Repository: https://github.com/remriel/acid-xerox-theme
-- Current source: 1.0.4, a CSS-only Obsidian theme. Obsidian 1.14.4 was used for live verification.
+- Current release: 1.0.4, a CSS-only Obsidian theme. Obsidian 1.14.4 was used for live verification. GitHub release: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.4.
 - User issue: long lists jump directly between top and bottom when scrolled; intermediate positions cannot be reached. Prior 1.0.1–1.0.3 CSS mitigations did not establish a live reproduction or verified fix.
 
 ## Architecture and constraints
@@ -28,8 +28,9 @@
 - In the user's vault with its existing plugins, the installed 1.0.4 theme yielded 120, 240, 360, 480, 600 then 480. Small 40-pixel down/up nudges at positions 10,000 and 20,000 returned to their starting positions.
 - `tests/theme.test.mjs` protects the `overflow-anchor: none` declaration. All nine dependency-free tests and `git diff --check` pass.
 - `manifest.json`, the `theme.css` header, `README.md`, and `CHANGELOG.md` are updated for 1.0.4. The user's installed theme copy also has 1.0.4; a backup of the prior copy is outside the repository.
+- The user confirmed that physical wheel scrolling works after the fix. Commit `318cdc4` is on `main` and tagged `1.0.4`; both validation and release workflows passed, and the release includes both required assets.
 - Windows Computer Use failed to capture the app and was abandoned. A previous attempt to disable several live stylesheet rules at once coincided with Obsidian closing; isolate future experiments in a test vault and restore modified CSS rules after each test.
 
 ## RESUME HERE
 
-The CSS fix and live verification are done. Review the final diff and repository status, commit and push 1.0.4 to GitHub, then check CI/release results. The installed user theme is already updated. Physical device-wheel input has not been rechecked by the user; the automated CDP wheel path passed in both the isolated and user vaults.
+Version 1.0.4 is released, locally installed, and confirmed working by the user. No unfinished work remains. If the problem returns after an Obsidian update, inspect the computed `overflow-anchor` on `.nav-files-container` and repeat the controlled 120-pixel and small-nudge down/up tests in a long folder. Avoid changing file-row geometry without a live reproduction.
