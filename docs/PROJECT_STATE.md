@@ -1,7 +1,7 @@
 # Project state
 
 - Repository: https://github.com/remriel/acid-xerox-theme
-- Current release: 1.0.4, a CSS-only Obsidian theme. Obsidian 1.14.4 was used for live verification. GitHub release: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.4.
+- Current release: 1.0.5, a CSS-only Obsidian theme. Obsidian 1.14.4 was used for live verification. GitHub release: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.4.
 - User issue: long lists jump directly between top and bottom when scrolled; intermediate positions cannot be reached. Prior 1.0.1–1.0.3 CSS mitigations did not establish a live reproduction or verified fix.
 
 ## Architecture and constraints
@@ -37,4 +37,4 @@ The reduced-motion universal rule used transition-duration: 0.01ms. This introdu
 
 ## RESUME HERE
 
-The 1.0.5 indentation fix is implemented, tested, and installed. Preserve both immediate reduced-motion transitions and disabled file-tree scroll anchoring. Publishing 1.0.5 through the existing main-branch release workflow.
+The 1.0.5 indentation fix is implemented, tested, and installed. Preserve both immediate reduced-motion transitions and disabled file-tree scroll anchoring. Version 1.0.5 is published: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.5. No unfinished work remains.
