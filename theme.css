@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.3
+  Acid Xerox v1.0.4
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -334,6 +334,8 @@ body {
   --nav-item-color-selected: #050505;
 }
 .workspace-leaf-content[data-type="file-explorer"] .nav-files-container {
+  /* Obsidian recycles file rows; browser scroll anchoring fights its scroll position. */
+  overflow-anchor: none;
   scroll-behavior: auto;
   overscroll-behavior-y: contain;
 }

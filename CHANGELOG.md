@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 - 2026-10-16
+
+- Disable browser scroll anchoring inside Obsidian's virtualized file explorer. Recycled rows previously caused runaway jumps and could move the list down after an upward wheel event.
+- Verified the change with repeated wheel input in an isolated Obsidian 1.14.4 vault containing 1,000 notes; the same input moved in 120-pixel steps in both directions.
+
 ## 1.0.3 - 2026-10-13
 
 - Resolve Obsidian theme CSS lint compatibility warnings for `text-decoration-color`, `text-decoration-line`, and `text-decoration-thickness`; use supported underline styling without changing line geometry.

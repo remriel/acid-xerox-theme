@@ -30,6 +30,7 @@ test('virtual file rows keep stable geometry', () => {
 });
 test('virtual file explorer uses native scrollbars and immediate scrolling', () => {
   assert.match(explorer, /\.nav-files-container\s*\{[^}]*scroll-behavior:\s*auto\s*;/);
+  assert.match(explorer, /\.nav-files-container\s*\{[^}]*overflow-anchor:\s*none\s*;/);
   assert.doesNotMatch(stripped, /scroll-behavior\s*:\s*smooth/);
   assert.doesNotMatch(stripped, /(^|,)\s*::-webkit-scrollbar(?:\b|[-:])/m);
   assert.doesNotMatch(stripped, /\.nav-files-container\s*::-webkit-scrollbar/);

@@ -1,19 +1,35 @@
 # Project state
 
 - Repository: https://github.com/remriel/acid-xerox-theme
-- Current source: version 1.0.2 (2026-10-13), a CSS-only Obsidian theme.
-- User issue: fast runaway scrolling to bottom within a large file explorer root or folder.
-- Earlier 1.0.1 changes reduced layout overrides but did not confirm or eliminate the user's remaining report.
+- Current source: 1.0.4, a CSS-only Obsidian theme. Obsidian 1.14.4 was used for live verification.
+- User issue: long lists jump directly between top and bottom when scrolled; intermediate positions cannot be reached. Prior 1.0.1–1.0.3 CSS mitigations did not establish a live reproduction or verified fix.
 
-## Mitigations in 1.0.2
+## Architecture and constraints
 
-- Use supported Obsidian navigation variables for consistent single-line row typography and hover/active colors.
-- Do not change explorer row margins, paddings, heights, line-height, transforms, or generated content.
-- Keep file explorer scrollbar native; decorate scrollbars only in reading view, editor and dialogs.
-- Remove the global tight-line-height override; prevent smooth scrolling and scroll chaining.
-- Keep the fluorescent visual identity using paint-only box shadows and variable-driven colors.
-- Protect key invariants using `node --test tests/theme.test.mjs` in continuous integration.
+- `theme.css` is the shipped theme; `manifest.json` supplies its version. Keep the version in the CSS header and manifest synchronized.
+- `.github/workflows/validate-theme.yml` runs dependency-free checks from `tests/theme.test.mjs` on pushes and pull requests.
+- `.github/workflows/release-theme.yml` publishes `manifest.json` and `theme.css` from the manifest version on `main`.
+- `README.md` documents manual installation and compatibility; `CHANGELOG.md` records releases.
+- File Explorer uses virtualized rows. Do not change their height, margins, padding, line height, transforms, or generated content without live evidence that the change is safe.
+- Keep user vault notes untouched. The fix is scoped to `.workspace-leaf-content[data-type="file-explorer"] .nav-files-container`.
 
-## Remaining verification
+## Cause and decision
 
-Native Obsidian foreground mouse-wheel/trackpad scrolling cannot be reproduced in this connector session. A static CSS audit and CI checks do not prove the app's scrolling behavior has been repaired. Recheck a large vault on the current Obsidian version. If the jumping also occurs with the Default theme and plugins disabled, isolate it as an Obsidian virtualized-file-tree or device scroll-input issue.
+- The 1.0.2 rules made file titles single line with fixed font weight, left row geometry native, removed a generated prefix, and kept the file explorer scrollbar native.
+- Those mitigations did not prevent the jump. A controlled Chrome DevTools Protocol `Input.dispatchMouseEvent` wheel sequence reproduced it under Acid Xerox in both the user's large vault and an isolated 1,000-note vault with no community plugins.
+- In the isolated vault, after five downward 120-pixel wheel events the list reached 2,347 pixels instead of 600; an upward event then moved it farther down to 3,033. With the theme stylesheet disabled, the same events moved in 120-pixel steps. Disabling the explorer's existing scroll rule alone did not help.
+- Setting `overflow-anchor: none` on the virtualized `.nav-files-container` produced 120, 240, 360, 480, 600 and returned to 480 on upward input. Removing that one property restored the bug. Browser scroll anchoring was adjusting the scroll position while Obsidian recycled rows.
+- `theme.css` now carries that one declaration. Keep native wheel handling, scrollbar sizing, and row geometry. Do not reintroduce browser scroll anchoring on this container.
+
+## Verification and relevant files
+
+- The Obsidian CLI's `eval` and `dev:cdp` commands allow DOM metric inspection and renderer wheel input without Windows Computer Use.
+- An isolated Obsidian 1.14.4 vault with 1,000 plain notes and no plugins verified the installed 1.0.4 theme: five down steps at 120-pixel intervals reached 600, an upward step returned to 480, ten more down steps reached 1,680, and ten up steps returned to 480. Mid-list and near-bottom 120-pixel down/up probes also returned to their starting positions.
+- In the user's vault with its existing plugins, the installed 1.0.4 theme yielded 120, 240, 360, 480, 600 then 480. Small 40-pixel down/up nudges at positions 10,000 and 20,000 returned to their starting positions.
+- `tests/theme.test.mjs` protects the `overflow-anchor: none` declaration. All nine dependency-free tests and `git diff --check` pass.
+- `manifest.json`, the `theme.css` header, `README.md`, and `CHANGELOG.md` are updated for 1.0.4. The user's installed theme copy also has 1.0.4; a backup of the prior copy is outside the repository.
+- Windows Computer Use failed to capture the app and was abandoned. A previous attempt to disable several live stylesheet rules at once coincided with Obsidian closing; isolate future experiments in a test vault and restore modified CSS rules after each test.
+
+## RESUME HERE
+
+The CSS fix and live verification are done. Review the final diff and repository status, commit and push 1.0.4 to GitHub, then check CI/release results. The installed user theme is already updated. Physical device-wheel input has not been rechecked by the user; the automated CDP wheel path passed in both the isolated and user vaults.
