@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.5
+  Acid Xerox v1.0.6
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -906,14 +906,21 @@ button.mod-warning:hover {
 }
 .markdown-source-view.index-card { background-color: var(--background-primary-alt); }
 /* Never transform CM6 ancestors or lines (including poster/index-card notes). */
-.theme-dark .workspace-tab-header.is-active {
+.theme-dark .workspace-split.mod-root .workspace-tab-header.is-active {
   --icon-color: #050505;
   --icon-color-hover: #050505;
   --tab-text-color: #050505;
   --tab-text-color-focused: #050505;
 }
-.theme-dark .workspace-tab-header.is-active .workspace-tab-header-inner-title {
-  color: #050505;
+/* Obsidian gives root-tab titles a more specific color in focused panes.
+   Scope this override to document tabs: active sidebar tabs have dark surfaces. */
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-button,
+body.is-focused .workspace-split.mod-root .workspace-tab-header-container .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+body.is-focused .workspace-split.mod-root .workspace-tab-header-container .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+body.is-focused .workspace-split.mod-root .workspace-tab-header-container .workspace-tab-header.is-active .workspace-tab-header-inner-close-button {
+  color: var(--ax-black);
 }
 .nav-folder-title:hover,
 .nav-file-title:hover,

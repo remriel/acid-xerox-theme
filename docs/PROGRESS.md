@@ -14,3 +14,7 @@ Progress: **100%** `[####################]`
 - [x] Confirm automatic GitHub release: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.5.
 
 No implementation blockers. No vault notes changed. Version 1.0.5 is published with both required assets. No remaining implementation work.
+
+## 1.0.6
+
+Reproduced the white-on-yellow active tab in an isolated Obsidian 1.14.5 vault. Fixed and checked active tab titles and controls in light and dark modes, focused and unfocused, without touching native file-tree geometry. The full regression suite passes.

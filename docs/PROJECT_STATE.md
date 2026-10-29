@@ -38,3 +38,7 @@ The reduced-motion universal rule used transition-duration: 0.01ms. This introdu
 ## RESUME HERE
 
 The 1.0.5 indentation fix is implemented, tested, and installed. Preserve both immediate reduced-motion transitions and disabled file-tree scroll anchoring. Version 1.0.5 is published: https://github.com/remriel/acid-xerox-theme/releases/tag/1.0.5. No unfinished work remains.
+
+## 1.0.6 contrast repair
+
+The focused document tab in Obsidian 1.14.5 rendered the light title over the yellow active background because an Obsidian selector outranked the existing theme rule. Scoped color overrides to the root document area with enough specificity for both focused and unfocused windows; sidebar tabs retain their own colors. Tested computed title and close-button colors against yellow in dark mode and cyan in light mode, with no low-contrast visible text found in the inspected test view. Preserved virtual-list fixes. Regression test covers both selectors and palette contrast.

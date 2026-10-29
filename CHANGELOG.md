@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 - 2026-10-28
+
+- Keep active document tab titles and controls dark against the bright yellow or cyan background, including when the window is focused.
+- Scope active-tab color variables to the document area so selected sidebar tabs retain their own theme colors.
+- Preserve native virtualized file-tree geometry, immediate reduced-motion transitions, and the scroll-anchoring fix.
+
 ## 1.0.5 - 2026-10-16
 
 - Make reduced-motion transitions truly immediate. A global 0.01ms transition delayed virtualized row padding resets, causing indentation to grow every time a folder was reopened.
