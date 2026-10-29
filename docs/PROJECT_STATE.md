@@ -42,3 +42,11 @@ The 1.0.5 indentation fix is implemented, tested, and installed. Preserve both i
 ## 1.0.6 contrast repair
 
 The focused document tab in Obsidian 1.14.5 rendered the light title over the yellow active background because an Obsidian selector outranked the existing theme rule. Scoped color overrides to the root document area with enough specificity for both focused and unfocused windows; sidebar tabs retain their own colors. Tested computed title and close-button colors against yellow in dark mode and cyan in light mode, with no low-contrast visible text found in the inspected test view. Preserved virtual-list fixes. Regression test covers both selectors and palette contrast.
+
+## 1.0.7 link hover
+
+The link section painted hovered reading-view anchors and CodeMirror link spans yellow while setting color on the hovered element. Descendant spans can retain their own color, making text disappear against yellow. Removed the background and explicit foreground from that rule, leaving Obsidian's link hover color variables and underlines intact. Static regression coverage protects against reintroducing a link-section background. Live Obsidian verification remains outstanding. Release workflow is `.github/workflows/release.yml`; validation is `.github/workflows/validate.yml`.
+
+## RESUME HERE (1.0.7)
+
+Verify 1.0.7 in Obsidian reading and editing views for internal and external links in light and dark modes if a live instance is available. Preserve the existing virtual-list fixes.

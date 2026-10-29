@@ -1,5 +1,5 @@
 /*
-  Acid Xerox v1.0.6
+  Acid Xerox v1.0.7
   Bold neo-brutalist Obsidian theme with a 1990s print / zine / interface vocabulary.
   No external assets. No imported fonts. Avoids high-specificity overrides.
 */
@@ -443,12 +443,8 @@ body {
   text-underline-offset: 3px;
 }
 
-.markdown-rendered a:hover,
-.cm-hmd-internal-link:hover,
-.cm-link:hover {
-  background: var(--ax-yellow);
-  color: var(--ax-black);
-}
+/* Let Obsidian's link hover colors apply without a background that can
+   obscure independently colored link text in reading and editing views. */
 
 /* ---------- Tags ---------- */
 a.tag,

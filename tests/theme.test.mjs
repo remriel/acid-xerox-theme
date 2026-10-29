@@ -78,3 +78,11 @@ test('Obsidian-compatible underlines avoid partially supported decoration featur
 test('highlight styling avoids partially supported box-decoration-break', () => {
   assert.doesNotMatch(stripped, /(?:-webkit-)?box-decoration-break\s*:/);
 });
+
+
+test('link hover does not paint a background over independently colored text', () => {
+  const section = css.split('/* ---------- Links ---------- */')[1].split('/* ---------- Tags ---------- */')[0].replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.doesNotMatch(section, /background(?:-color)?\s*:/);
+  assert.match(css, /--link-color-hover:/);
+  assert.match(css, /--link-external-color-hover:/);
+});

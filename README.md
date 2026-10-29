@@ -70,6 +70,7 @@ The chaos is controlled. Body copy stays calm. Navigation, headings, metadata, s
 - No external assets.
 - No `!important` rules.
 - No `:has()` selectors.
+- Version 1.0.7 removes the yellow link hover background to keep link text readable.
 - Version 1.0.6 improves active document tab contrast in light and dark modes and retains the 1.0.4–1.0.5 file-tree fixes.
 - Version 1.0.4 disables browser scroll anchoring in the virtualized file tree to prevent runaway or wrong-way scrolling.
 

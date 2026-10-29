@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7 - 2026-10-28
+
+- Remove the yellow link hover background so independently colored link text stays visible in reading and editing views.
+
 ## 1.0.6 - 2026-10-28
 
 - Keep active document tab titles and controls dark against the bright yellow or cyan background, including when the window is focused.
