@@ -86,3 +86,5 @@ MIT. See [LICENSE](./LICENSE).
 
 - [Untitled Auto Title](https://github.com/remriel/obsidian-untitled-auto-title): automatically rename untitled Markdown notes with Groq or local content extraction.
 - [Automatic Mood History](https://github.com/remriel/automatic-mood-history): local-first mood timelines for journal notes.
+
+If you find this project useful, you can [buy me a coffee](https://buymeacoffee.com/remriel).
